@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom Colors */
+  --color-background: #020617; /* Slate 950 */
+  --color-cyan-glow: #22d3ee;
+  
+  /* Custom Animations */
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+
+  @keyframes glow {
+    from { box-shadow: 0 0 5px rgba(34, 211, 238, 0.2); }
+    to { box-shadow: 0 0 20px rgba(34, 211, 238, 0.6); }
+  }
+}
+
+/* Custom Base Styles */
+:root {
+  --background: #020617;
+  --foreground: #f8fafc;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Digital Grid Background - Memberikan kesan Cyber */
+.digital-grid {
+  background-image: 
+    linear-gradient(to right, rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Glowing Text Effect */
+.text-glow {
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}

@@ -1,0 +1,37 @@
+name: VulnGuard DevSecOps Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1. Scan Source Code dengan SonarCloud
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # 2. Build Docker Image (Simulasi)
+      - name: Build Docker Image
+        run: docker build -t vulnguard-app ./web-app
+
+      # 3. Scan Docker Image dengan Trivy (Vulnerability Scan)
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'vulnguard-app'
+          format: 'table'
+          exit-code: '1' # Gagal jika ada celah keamanan kritis
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
