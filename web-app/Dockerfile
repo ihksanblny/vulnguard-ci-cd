@@ -4,7 +4,7 @@ FROM node:20-alpine AS builder
 RUN apk update && apk upgrade && apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --no-package-lock
 COPY . .
 RUN npm run build
 
