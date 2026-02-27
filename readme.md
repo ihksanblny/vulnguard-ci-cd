@@ -7,4 +7,3 @@ Note : Menunjukkan beberapa dependencies npm tidak diinstall dengan baik
 ![Trivy Scan Result](./docs/3.png)
 ---
 Note : Menunjukkan Pengecekan Berjalan lancar dan sampai akhir
----
