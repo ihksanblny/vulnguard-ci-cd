@@ -1,5 +1,7 @@
 # Stage 1: Build
 FROM node:20-alpine AS builder
+# Tambahkan ini untuk update OS agar celah level sistem hilang
+RUN apk update && apk upgrade && apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -8,6 +10,7 @@ RUN npm run build
 
 # Stage 2: Runner
 FROM node:20-alpine AS runner
+RUN apk update && apk upgrade # Update OS lagi di stage runner
 WORKDIR /app
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/public ./public
