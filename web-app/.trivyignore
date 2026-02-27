@@ -1,0 +1,5 @@
+# Accepted Risk: minimatch vulnerabilities from npm internal dependencies
+# These are not from our application code but from npm's bundled packages
+# Will be resolved when Node.js base image updates npm
+CVE-2026-27903
+CVE-2026-27904
